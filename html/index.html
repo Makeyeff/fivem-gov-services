@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./widget/style.css" />
+    <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+
+    <script src="js/script.js"></script>
+  </head>
+  <body>
+    <div class="exitbtn">
+      <span>close menu</span>
+      <img src="./imgs/close.png" />
+    </div>
+
+    <div class="right">
+      <div class="header">
+        <div class="whitelist-menu">
+          <div class="nav-item nav-all active">
+            <img class="nav-icon" src="./imgs/all.png" /><span>Гос услуги</span>
+          </div>
+        </div>
+      </div>
+      <div class="job-list"></div>
+    </div>
+    <div class="p-overlay"></div>
+    <div class="request-popup">
+      <div class="p-boxes">
+        <div class="p-left">
+          <div class="p-back"><img src="./imgs/back.png" />Back</div>
+          <div class="p-jobname">BURGER SHOP</div>
+          <div class="p-inform">
+            <div class="p-row">
+              <div class="p-key">YOUR NAME :</div>
+              <div class="p-value" id="PlayerName"></div>
+            </div>
+
+            <div class="p-row">
+              <div class="p-key">YOUR JOB :</div>
+              <div class="p-value" id="PlayerJob"></div>
+            </div>
+            <div class="p-row">
+              <div class="p-key">YOUR PHONE :</div>
+              <div class="p-value" id="PlayerPhone"></div>
+            </div>
+          </div>
+        </div>
+        <div class="p-right">
+          <div class="p-title">REQUEST TO JOIN</div>
+          <div class="p-questions"></div>
+          <div class="p-btns">
+            <div class="p-btn-submit">Подтвердить</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="./widget/notify.js"></script>
+</html>

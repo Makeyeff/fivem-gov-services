@@ -3,9 +3,9 @@ Config = {}
 Config.Mysql = "mysql-async"
 
 Config.StartLocation = {
-    pedcoords = vector4(-269.81802368164, -960.033203125, 30.22313117981, 301.3229675293),
+    pedcoords = vector4(-269, -960, 30.22313117981, 301.3229675293),
     pedModel = 'a_m_y_business_01',
-    markercoord = vector3(-269.27758789063, -959.7373046875, 30.22313117981),
+    markercoord = vector3(-269, -960, 30.22313117981),
     markerConfig = {
         Type = 1,
         rgb = {

@@ -22,22 +22,6 @@ Config.StartLocation = {
     }
 }
 
-
-Config.Jobs = {{
-    isGoverment = true,
-    jobname = "Сменить имя",
-    desc = "Тут можно сменить ваше имя и фамилию",
-    level = 0,
-    image = "./imgs/lumberjack_bg.jpg",
-    whitelist = true,
-    webhook = 'https://discord.com/api/webhooks/1133469268411957329/fwdrfMAgzzVcYaKOYzpxVl45grFf6O3lqncajUNTkvjfo79vA9xvYUe2gF_60tv7M-kG',
-    setJobConfig = {
-        name = 'lumberjack',
-        grade = 0
-    },
-    questions = {"Введите имя", "Введите фамилию"}
-}}
-
 Config.Local = {
     ['jobsetit'] = 'Welcome To : ',
     ['jobWhitelistSend'] = 'Your Whitelist Sended To : ',

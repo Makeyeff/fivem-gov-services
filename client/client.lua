@@ -1,26 +1,9 @@
-QBCore = exports['qb-core']:GetCoreObject()
-local Jobs = Config.Jobs
-function dump(o)
-    if type(o) == 'table' then
-        local s = '{ '
-        for k, v in pairs(o) do
-            if type(k) ~= 'number' then
-                k = '"' .. k .. '"'
-            end
-            s = s .. '[' .. k .. '] = ' .. dump(v) .. ','
-        end
-        return s .. '} '
-    else
-        return tostring(o)
-    end
-end
-local jobCounter = 1 -- Initialize a counter to assign unique job IDs
-local Clientjob = {}
+local QBCore = exports['qb-core']:GetCoreObject()
+
 local peds = {}
 
 CreateThread(function()
     SetNuiFocus(false, false)
-    Clientjob = {}
     Wait(1000)
     DoScreenFadeIn(1000)
 end)
@@ -31,31 +14,32 @@ local function helptext(str)
     DisplayHelpTextFromStringLabel(0, 0, 1, -1)
 end
 
-local function GenerateJobID()
-    local id = jobCounter
-    jobCounter = jobCounter + 1
-    return id
-end
-
-local function openJobCenter()
+local function openGovServicesUI()
     local player = QBCore.Functions.GetPlayerData()
+    local metadata = player.metadata
     local charinfo = player.charinfo
+    local licences = metadata.licences
+
     local firstName = player.charinfo.firstname
     local lastName = player.charinfo.lastname
     local phone = charinfo.phone
-    for _, job in ipairs(Jobs) do
-        job.job_id = GenerateJobID()
-        job.lock = false
-        table.insert(Clientjob, job)
-    end
-    print(dump(player.job))
+    local citizenId = player.citizenid
+    local dateOfBirth = charinfo.birthdate
+    local gender = charinfo.gender
+    local nationality = charinfo.nationality
+    local nationality = charinfo.nationality
+    local driver = licences.driver
     SetNuiFocus(true, true)
     SendNUIMessage({
         action = "SHOW_UI",
-        Jobs = Clientjob,
-        name = firstName .. " " .. lastName,
-        phone = phone,
-        job = player.job.name
+        firstname = firstName,
+        secondname = lastName,
+        nationality = nationality,
+        dateOfBirth = dateOfBirth,
+        citizenId = citizenId,
+        gender = gender,
+        driver = driver,
+        licences = licences
     })
 end
 
@@ -65,8 +49,51 @@ local Open_Menu = function()
         Wait(0)
     end
     Wait(1000)
-    openJobCenter()
+    openGovServicesUI()
 end
+
+RegisterNUICallback('close', function(data, cb)
+    SetNuiFocus(false, false)
+    Wait(1000)
+    DoScreenFadeIn(1000)
+end)
+
+RegisterNUICallback('changeNameIdCard', function(data, cb)
+    local firstname = data.firstname
+    local secondname = data.secondname
+    QBCore.Functions.TriggerCallback('govermentService:server:changeName', function()
+        TriggerEvent('QBCore:Notify', 'Данные были изменены')
+    end, firstname, secondname)
+end)
+
+RegisterNUICallback('getIdCard', function(data, cb)
+    QBCore.Functions.TriggerCallback('govermentService:server:getIdCard', function()
+        TriggerEvent('QBCore:Notify', 'Новая Id карта получена')
+    end)
+end)
+
+RegisterNUICallback('changeNameIdCard', function(data, cb)
+    local firstname = data.firstname
+    local secondname = data.secondname
+    QBCore.Functions.TriggerCallback('govermentService:server:changeName', function()
+        TriggerEvent('QBCore:Notify', 'Данные были изменены')
+    end, firstname, secondname)
+end)
+
+RegisterNUICallback('getDriverLicense', function(data, cb)
+    QBCore.Functions.TriggerCallback('govermentService:server:getDriverLicense', function()
+        TriggerEvent('QBCore:Notify', 'Новые водительские права получены');
+    end)
+end)
+
+RegisterNUICallback('writeToGov', function(data, cb)
+    local msg = data.msg
+    local name = data.name
+
+    QBCore.Functions.TriggerCallback('govermentService:server:writeToGov', function()
+        TriggerEvent('QBCore:Notify', 'Обращение отправлено')
+    end, msg, name)
+end)
 -- createBlip
 Citizen.CreateThread(function()
     Wait(2000)
@@ -136,25 +163,5 @@ Citizen.CreateThread(function()
         if sleep then
             Wait(1000)
         end
-    end
-end)
-
-RegisterNUICallback('close', function(data, cb)
-    SetNuiFocus(false, false)
-    Clientjob = {}
-    Wait(1000)
-    DoScreenFadeIn(1000)
-end)
-
--- ui кожда жмет подтвердить
-RegisterNUICallback('whitelistRequest', function(data, cb)
-    local selectedServices = tonumber(data.id)
-    local selectedAnswers = data.answers
-    local firstname = selectedAnswers[1].answer
-    local lastname = selectedAnswers[2].answer
-    if selectedServices == 1 then
-        QBCore.Functions.TriggerCallback('qb-informator:server:changeName', function()
-            TriggerEvent('QBCore:Notify', 'Данные были изменены')
-        end, firstname, lastname)
     end
 end)

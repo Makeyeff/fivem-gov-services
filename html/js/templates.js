@@ -2,13 +2,13 @@ import { text } from './text.js';
 
 export const agreeChangeIdCardTemplate = () => {
   return `
-    <div class="title-changeCardId">Смена паспортных данных </div><div></div>
-    <div>Введите новое имя: </div>
+    <div class="title-changeCardId">${text.template.agreeChangeIdCardTemplate.title}</div><div></div>
+    <div>${text.template.agreeChangeIdCardTemplate.name}</div>
     <input id="firstname" />
-    <div>Введите новую фамилию: </div>
+    <div>${text.template.agreeChangeIdCardTemplate.lastname}</div>
     <input id="secondname" />
-     <div class="btn-changeCardId-disagree">Отмена</div>
-    <div class="btn-changeCardId">Подтвердить</div>
+     <div class="btn-changeCardId-disagree">${text.template.agreeChangeIdCardTemplate.btnCancel}</div>
+    <div class="btn-changeCardId">${text.template.agreeChangeIdCardTemplate.btnAgree}</div>
   `}
 
 export const servicesTemplate = (title, description, id) => {
@@ -16,14 +16,13 @@ export const servicesTemplate = (title, description, id) => {
     <div class="template-item">
       <div class="template-item-title">${title}</div>
       <div class="template-item-description">${description}</div>
-      <div class="template-item-btn btn-${id}">Выбрать</div>
+      <div class="template-item-btn btn-${id}">${text.template.servicesTemplate.btnChoice}</div>
     </div>
    `
 }
 
 export const licenseTemplate = (title, active) => {
-  const value = active ? 'Активна' : 'Не активна'
-  console.log()
+  const value = active ? text.template.licenseTemplate.active : text.template.licenseTemplate.disActive;
   const resultTitle = text.licenses?.[title]?.[0] ? text.licenses?.[title]?.[0] : title;
   const resultDescription = text.licenses?.[title]?.[1] ? text.licenses?.[title]?.[1] : title;
 
@@ -38,8 +37,8 @@ export const licenseTemplate = (title, active) => {
 
 export const showAppealsTemplate = () => {
   return `
-    <div class="title-changeCardId">Ваше обращение</div>
+    <div class="title-changeCardId">${text.template.showAppealsTemplate.title}</div>
     <textarea id="appeals" rows="5" cols="33"></textarea>
-    <div class="btn-appeals-disagree">Отмена</div>
-    <div class="btn-appeals">Подтвердить</div>
+    <div class="btn-appeals-disagree">${text.template.showAppealsTemplate.btnDisagree}</div>
+    <div class="btn-appeals">${text.template.showAppealsTemplate.btnAgree}</div>
   `}

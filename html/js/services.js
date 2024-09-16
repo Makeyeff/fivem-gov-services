@@ -1,5 +1,7 @@
 import { agreeChangeIdCardTemplate } from './templates.js'
 import { mouseSoundEffect } from './mouseSoundEffect.js';
+import { notif } from './notify.js';
+import { text } from './text.js';
 
 const agreeChangeIdCard = () => {
   const firstname = $('#firstname').val();
@@ -16,6 +18,7 @@ const agreeChangeIdCard = () => {
   );
   $('#o-profile-name').html(firstname.trim());
   $('#o-profile-lastname').html(secondname.trim());
+  notif(text.servicesText.notify)
   canselButton()
 }
 
@@ -41,9 +44,11 @@ export const showChangeCardPopup = () => {
 export const getIdCard = () => {
   mouseSoundEffect();
   $.post(`http://${GetParentResourceName()}/getIdCard`);
+  notif(text.servicesText.notifyGetIdCard)
 }
 
 export const getDriverLicense = () => {
   mouseSoundEffect();
   $.post(`http://${GetParentResourceName()}/getDriverLicense`);
+  notif(text.servicesText.getDriverLicense)
 }

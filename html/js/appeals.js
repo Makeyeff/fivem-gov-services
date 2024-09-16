@@ -1,6 +1,8 @@
 import { showAppealsTemplate } from './templates.js';
 import { mouseSoundEffect } from "./mouseSoundEffect.js";
 import { showContent } from './navigation.js';
+import { notif } from './notify.js'
+import { text } from './text.js';
 
 const appealsCansel = () => {
     mouseSoundEffect();
@@ -16,7 +18,6 @@ const writeMsg = (msg) => {
     const name = $('#o-profile-name').text();
     const resultName = name + ' ' + lastName
     if (!msg.trim()) {
-        // appealsCansel()
         return;
     }
     $.post(
@@ -26,6 +27,7 @@ const writeMsg = (msg) => {
             name: resultName
         })
     );
+    notif(text.appeals.notMsg)
     appealsCansel()
 }
 

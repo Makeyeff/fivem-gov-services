@@ -199,6 +199,7 @@ body {
   text-transform: capitalize;
 }
 
+.p-boxes-notify,
 .p-boxes {
   font-family: "Montserrat", sans-serif;
   font-size: 18px;
@@ -226,7 +227,7 @@ body {
   font-size: 20px;
   font-weight: 700;
 }
-
+.request-popup-notify,
 .request-popup {
   z-index: 3;
   position: fixed;
@@ -265,4 +266,26 @@ body {
   font-family: "Montserrat", sans-serif;
   font-size: 20px;
   font-weight: 700;
+}
+/* ---------- */
+.notification {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: #4caf50; /* Зеленый цвет */
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* Обеспечить, что уведомление будет на переднем плане */
+  transition: opacity 0.5s ease;
+}
+
+.hidden1 {
+  display: none; /* Скрыть уведомление */
+}
+
+.show1 {
+  display:block;
+  opacity: 1; /* Убедиться, что уведомление видно */
 }
